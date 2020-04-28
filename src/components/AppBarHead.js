@@ -8,10 +8,10 @@ const theme = {
   }
 }
 
-const AppBarHead = ({ navigation, title }) => {
+const AppBarHead = ({ navigation, title, icon }) => {
   return (
     <Appbar.Header theme={theme} >
-        <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
+        <Appbar.Action icon={icon} onPress={() => icon === 'menu' ? navigation.openDrawer() : navigation.goBack()} />
         <Appbar.Content title={title} />
         <Appbar.Action icon="magnify" onPress={() => navigation.openDrawer()} />
       </Appbar.Header>

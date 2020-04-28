@@ -3,10 +3,11 @@ import { View, StyleSheet, FlatList, Text, Dimensions, TouchableOpacity } from '
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Constants from 'expo-constants';
 
-export const RenderList = ({ id, title, image}) => {
+export const RenderList = ({ id, navigation, title, image}) => {
     return (
         <TouchableOpacity 
             style={styles.viewStyle}
+            onPress={() => navigation.navigate('Detail', {id: id, title: title})}
         >
             <Card style={styles.item}>
                 <Card.Cover source={{ uri: image }} />
@@ -18,7 +19,7 @@ export const RenderList = ({ id, title, image}) => {
 
 const numColumns = 2;
 
-const CardAnime = ({ data }) => {
+const CardAnime = ({ data, navigation }) => {
     return (
         <View style={styles.container}>
         <FlatList
@@ -26,7 +27,8 @@ const CardAnime = ({ data }) => {
             data={data}
             renderItem={({item}) => (
                 <RenderList
-                    id={item.id}    
+                    id={item.id}
+                    navigation={navigation}
                     title={item.attributes.canonicalTitle}
                     image={item.attributes.posterImage.small}
                 />

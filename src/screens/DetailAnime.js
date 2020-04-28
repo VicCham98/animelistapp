@@ -1,13 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native'
+import Axios from 'axios';
+import AppBarHead from '../components/AppBarHead';
 
-const DetailAnime = () => {
+const DetailAnime = ({ route, navigation }) => {
+  const { id, title } = route.params
+  const [data, setData] = useState([])
+  
+  useEffect(()=> {
+    Axios.get(`https://kitsu.io/api/edge/anime/${id}`)
+      .then(res => {
+        let response = res.data;
+        setData(response.data)
+      })
+  },[id])
+
+  console.log(data.attributes.posterImage.tiny);
+  
+
   return (
     <View style={styles.container}>
+      <AppBarHead
+        icon='arrow-left'
+        navigation={navigation}
+        title={title}
+      />
+      <View style={styles.cover}>
+        <Image 
+          style={{width: '100%', height: '30%'}}
+          source={{uri: data.attributes.coverImage.tiny}} 
+        />
+      </View>
+      
       <Text>View Detail Anime</Text>
-      <View style={styles.viewOne}/>
-      <View style={styles.viewTwo}/>
-      <View style={styles.viewThree}/>
+      
     </View>
   );
 }
@@ -16,23 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ebebeb',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  viewOne: {
-    backgroundColor: 'black',
-    width: '100%',
-    height: 100,
-  },
-  viewTwo: {
-    backgroundColor: 'green',
-    width: '75%',
-    height: 100,
-  },
-  viewThree: {
-    backgroundColor: 'red',
-    width: '25%',
-    height: 100,
+  cover: {
+    flex: 1
   }
 });
 

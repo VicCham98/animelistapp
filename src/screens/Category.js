@@ -6,8 +6,9 @@ const Category = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <AppBarHead
-            navigation={navigation}
-            title="Category"
+          icon='menu'
+          navigation={navigation}
+          title="Category"
         />
       <Text>View Category</Text>
       <Button 

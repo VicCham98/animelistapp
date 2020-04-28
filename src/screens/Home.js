@@ -19,12 +19,14 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <AppBarHead
+        icon='menu'
         navigation={navigation}
         title="Home"
       />
-      <CardAnime 
-          data={data}
-        />
+      <CardAnime
+        navigation={navigation}
+        data={data}
+      />
     </View>
   );
 }
