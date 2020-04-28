@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Appbar } from 'react-native-paper';
 
 const theme = {
@@ -11,9 +11,9 @@ const theme = {
 const AppBarHead = ({ navigation, title }) => {
   return (
     <Appbar style={styles.bottom} theme={theme} >
-      <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
-      <Appbar.Content title={title} />
-    </Appbar>
+        <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
+        <Appbar.Content title={title} />
+      </Appbar>
   );
 }
 
