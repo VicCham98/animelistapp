@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import CardAnime from '../components/CardAnime';
 import Axios from 'axios'
-import Constants from 'expo-constants';
+
 const Home = ({ navigation }) => {
 
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   useEffect(()=> {
-    Axios.get(`https://kitsu.io/api/edge/trending/anime`)
-      .then(res => {
-        let response = res.data;
-        setData(response.data)
-      })
+    const getRecentlyAnimes = async () => {
+      try {
+          let response = await Axios.get(`https://kitsu.io/api/edge/trending/anime`);
+          let data = await response.data;
+          setData(data.data);
+          setLoading(false);
+      } catch (e) {
+          setLoading(false);
+          setError(e);
+          console.log(e)
+      }
+    };
+    getRecentlyAnimes();
   },[])
-
+  
   return (
     <View style={styles.container}>
       <AppBarHead
@@ -23,10 +33,18 @@ const Home = ({ navigation }) => {
         navigation={navigation}
         title="Home"
       />
-      <CardAnime
-        navigation={navigation}
-        data={data}
-      />
+      {
+        loading ? 
+        <View style={styles.loadingStyle}>
+          <ProgressBarAndroid color="#343a40" styleAttr='Large' />
+        </View>
+        :
+        <CardAnime
+          navigation={navigation}
+          data={data}
+        />
+      }
+      
     </View>
   );
 }
@@ -34,6 +52,11 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loadingStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center'
   }
   });
 
