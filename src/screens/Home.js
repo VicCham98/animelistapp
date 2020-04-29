@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import CardAnime from '../components/CardAnime';
-import Axios from 'axios'
+import GetAnime from "../hooks/GetAnime";
 
 const Home = ({ navigation }) => {
 
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  useEffect(()=> {
-    const getRecentlyAnimes = async () => {
-      try {
-          let response = await Axios.get(`https://kitsu.io/api/edge/trending/anime`);
-          let data = await response.data;
-          setData(data.data);
-          setLoading(false);
-      } catch (e) {
-          setLoading(false);
-          setError(e);
-          console.log(e)
-      }
-    };
-    getRecentlyAnimes();
-  },[])
+  const { data, loading } = GetAnime(`trending/anime`);
   
   return (
     <View style={styles.container}>
@@ -58,6 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center'
   }
-  });
+});
 
 export default Home;
