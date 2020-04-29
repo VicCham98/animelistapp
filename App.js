@@ -7,6 +7,8 @@ import Category from './src/screens/Category';
 import Home from './src/screens/Home';
 import ThemeContextProvider from './src/contexts/ThemeContext'
 import DetailAnime from './src/screens/DetailAnime';
+import { DrawerContent } from './src/screens/DrawerContent';
+import Contants from 'expo-constants'
 
 const Drawer = createDrawerNavigator();
 
@@ -17,15 +19,16 @@ export default function App() {
         <View style={styles.container}>
           <NavigationContainer>
             <Drawer.Navigator
+              drawerContent={ props => <DrawerContent {...props} />}
               initialRouteName="Home" 
-              drawerStyle={{ backgroundColor: '#fff' }}
+              drawerStyle={{ backgroundColor: '#fff', marginTop: Contants.statusBarHeight, }}
               drawerContentOptions={{
                 activeTintColor: 'black',
               }}  
             >
-                <Drawer.Screen name="Home" component={Home} options={{ drawerLabel: 'Home' }} />
-                <Drawer.Screen name="Category" component={Category} options={{ drawerLabel: 'Category' }} />
-                <Drawer.Screen name="Detail" component={DetailAnime} options={{ drawerLabel: 'Detail' }} />
+                <Drawer.Screen name="Home" component={Home} />
+                <Drawer.Screen name="Category" component={Category} />
+                <Drawer.Screen name="Detail" component={DetailAnime} />
             </Drawer.Navigator>
           </NavigationContainer>
         </View>
