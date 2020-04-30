@@ -1,7 +1,8 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
+import { SearchContext } from './../contexts/SearchContext'
 
 const theme = {
   colors: {
@@ -12,18 +13,31 @@ const theme = {
 const AppBarHead = ({ navigation, title, icon }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [openSearch, setOpenSearch] = useState(false)
+  const { state, dispatch } = useContext(SearchContext)
 
   return (
     <Appbar.Header theme={theme} >
       {
         openSearch ?
         <Fragment>
-          <Appbar.Action color='white' icon='arrow-left' onPress={() => setOpenSearch(!openSearch)} />
+          <Appbar.Action 
+            color='white' 
+            icon='arrow-left' 
+            onPress={() => {
+              setOpenSearch(!openSearch)
+              setSearchQuery('')
+              dispatch({ type: 'CLEAR_SEARCH' })
+            }} />
           <View style={{ flex: 1 }}>
             <Searchbar
               placeholder="Search"
-              onChangeText={setSearchQuery}
+              onChangeText={(query) =>{
+                setSearchQuery(query)
+                dispatch({ type: 'ADD_SEARCH', payload: query})
+              }}
               value={searchQuery}
+              onIconPress={() => {alert(state.search)}}
+              autoFocus={true}
             />
           </View>
         </Fragment>

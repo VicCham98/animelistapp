@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Category from './src/screens/Category';
 import Home from './src/screens/Home';
-import ThemeContextProvider from './src/contexts/ThemeContext'
+import SearchContextProvider from './src/contexts/SearchContext'
 import DetailAnime from './src/screens/DetailAnime';
 import { DrawerContent } from './src/screens/DrawerContent';
 import Contants from 'expo-constants'
@@ -14,7 +14,7 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <ThemeContextProvider>
+    <SearchContextProvider>
       <PaperProvider>
         <View style={styles.container}>
           <NavigationContainer>
@@ -33,7 +33,7 @@ export default function App() {
           </NavigationContainer>
         </View>
       </PaperProvider>
-    </ThemeContextProvider>
+    </SearchContextProvider>
   );
 }
 
