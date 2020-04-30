@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
+import GetAnime from "../hooks/GetAnime";
+import CardAnime from '../components/CardAnime';
 
 const Category = ({ navigation }) => {
+  const { data, loading } = GetAnime(`anime`);
+
   return (
     <View style={styles.container}>
         <AppBarHead
@@ -10,11 +14,17 @@ const Category = ({ navigation }) => {
           navigation={navigation}
           title="Category"
         />
-      <Text>View Category</Text>
-      <Button 
-        title="go Home"
-        onPress={() => navigation.navigate("Home")}
-      />
+        {
+        loading ? 
+        <View style={styles.loadingStyle}>
+          <ProgressBarAndroid color="#343a40" styleAttr='Large' />
+        </View>
+        :
+        <CardAnime
+          navigation={navigation}
+          data={data}
+        />
+      }
     </View>
   );
 }
@@ -22,8 +32,12 @@ const Category = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ebebeb',
   },
+  loadingStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center'
+  }
 });
 
 export default Category;
