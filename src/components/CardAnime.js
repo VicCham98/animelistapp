@@ -19,14 +19,14 @@ const CardAnime = ({ data, navigation }) => {
                             navigation.navigate('Detail', {
                                 id: item.id,
                                 title: item.attributes.canonicalTitle,
-                                poster: item.attributes.posterImage.small,
+                                poster: item.attributes.posterImage != null ? item.attributes.posterImage.small : null,
                                 synopsis: item.attributes.synopsis,
                                 averageRating: item.attributes.averageRating,
                                 startDate: item.attributes.startDate,
                                 ageRatingGuide: item.attributes.ageRatingGuide,
                                 episodeCount: item.attributes.episodeCount,
                                 youtubeVideoId: item.attributes.youtubeVideoId,
-                                cover: item.attributes.coverImage.small
+                                cover: item.attributes.coverImage != null ? item.attributes.coverImage.small : null
                             })
                         }}
                     >
