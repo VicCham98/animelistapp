@@ -36,7 +36,6 @@ const AppBarHead = ({ navigation, title, icon }) => {
                 dispatch({ type: 'ADD_SEARCH', payload: query})
               }}
               value={searchQuery}
-              onIconPress={() => {alert(state.search)}}
               autoFocus={true}
             />
           </View>
