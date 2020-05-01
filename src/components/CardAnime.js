@@ -5,13 +5,16 @@ import { SearchContext } from '../contexts/SearchContext';
 
 const numColumns = 2;
 
-const CardAnime = ({ data, navigation, handleLoadMore }) => {
+const CardAnime = ({ data, navigation, handleLoadMore, RenderFooter }) => {
 
     const { dispatch } = useContext(SearchContext)
+
+    
 
     return (
         <View style={styles.container}>
         <FlatList
+            ListFooterComponent={RenderFooter}
             onEndReached={handleLoadMore}
             // onEndReachedThreshold={1}
             keyExtractor={item => item.id}

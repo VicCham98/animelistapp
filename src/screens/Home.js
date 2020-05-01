@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import CardAnime from '../components/CardAnime';
 import GetAnime from "../hooks/GetAnime";
+import { Title } from 'react-native-paper';
 
 const Home = ({ navigation }) => {
 
@@ -21,10 +22,13 @@ const Home = ({ navigation }) => {
           <ProgressBarAndroid color="#343a40" styleAttr='Large' />
         </View>
         :
-        <CardAnime
-          navigation={navigation}
-          data={data}
-        />
+        <Fragment>
+          <Title style={{marginLeft: 10, marginTop: 10, fontSize: 20}}>Trending This Week</Title>
+          <CardAnime
+            navigation={navigation}
+            data={data}
+          />
+        </Fragment>
       }
       
     </View>
@@ -34,6 +38,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#e3e3e3'
   },
   loadingStyle: {
     flex: 1,

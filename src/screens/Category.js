@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
+import { StyleSheet, View, ProgressBarAndroid, ActivityIndicator } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import GetAnime from "../hooks/GetAnime";
 import CardAnime from '../components/CardAnime';
@@ -10,6 +10,14 @@ const Category = ({ navigation }) => {
 
   const handleLoadMore = () => {
     SetPage(page + 1)
+}
+
+const RenderFooter = () => {
+  return (
+      <View style={styles.loader}>
+          <ActivityIndicator size='large' />
+      </View>
+  )
 }
 
   return (
@@ -26,6 +34,7 @@ const Category = ({ navigation }) => {
         </View>
         :
         <CardAnime
+          RenderFooter={RenderFooter}
           handleLoadMore={handleLoadMore}
           navigation={navigation}
           data={data}
@@ -43,7 +52,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center'
-  }
+  },
+  
+  loader: {
+    marginTop: 10,
+    alignItems: 'center'
+}
 });
 
 export default Category;
