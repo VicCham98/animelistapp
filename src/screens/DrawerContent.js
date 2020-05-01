@@ -33,8 +33,8 @@ export function DrawerContent (props) {
                                 size={50}
                             />
                             <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                                <Title style={styles.title}>Victor Chambilla</Title>
-                                <Caption style={styles.caption}>@victor</Caption>
+                                <Title style={styles.title}>Guest</Title>
+                                <Caption style={styles.caption}>@Guest</Caption>
                             </View>
                         </View>
                         <View style={styles.row}>
@@ -68,18 +68,21 @@ export function DrawerContent (props) {
                                 <IconButton icon="settings-outline" color={color} size={size}/>
                             )}
                             label='Settings'
-                            onPress={() => {}}
+                            onPress={() => {alert("Building...")}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <IconButton icon="account-check-outline" color={color} size={size}/>
                             )}
                             label='Support'
-                            onPress={() => {}}
+                            onPress={() => {alert("Building...")}}
                         />
                     </Drawer.Section>
                     <Drawer.Section title='Preferences'>
-                        <TouchableRipple onPress={() => {toggleTheme()}}>
+                        <TouchableRipple onPress={() => {
+                            toggleTheme()
+                            alert("Building...")
+                            }}>
                             <View style={styles.preference}>
                                 <Text>Dark Theme</Text>
                                 <View pointerEvents='none'>
@@ -95,7 +98,7 @@ export function DrawerContent (props) {
                     icon={({color, size}) => (
                         <IconButton icon="exit-to-app" color={color} size={size}/>
                     )}
-                    label='Sign Out'
+                    label='Log in'
                 />
             </Drawer.Section>
         </View>
