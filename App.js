@@ -9,6 +9,7 @@ import SearchContextProvider from './src/contexts/SearchContext'
 import DetailAnime from './src/screens/DetailAnime';
 import { DrawerContent } from './src/screens/DrawerContent';
 import Contants from 'expo-constants'
+import Search from './src/screens/Search'
 
 const Drawer = createDrawerNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
                 <Drawer.Screen name="Home" component={Home} />
                 <Drawer.Screen name="Category" component={Category} />
                 <Drawer.Screen name="Detail" component={DetailAnime} />
+                <Drawer.Screen name="Search" component={Search} />
             </Drawer.Navigator>
           </NavigationContainer>
         </View>

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Text, Dimensions, TouchableOpacity } from 'react-native'
+import React, { useContext } from 'react';
+import { View, StyleSheet, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-paper';
+import { SearchContext } from '../contexts/SearchContext';
 
 const numColumns = 2;
 
-const CardAnime = ({ data, navigation }) => {
+const CardAnime = ({ data, navigation, handleLoadMore }) => {
+
+    const { dispatch } = useContext(SearchContext)
 
     return (
         <View style={styles.container}>
         <FlatList
+            onEndReached={handleLoadMore}
+            // onEndReachedThreshold={1}
             keyExtractor={item => item.id}
             data={data}
             renderItem={({item}) => {
@@ -28,6 +33,7 @@ const CardAnime = ({ data, navigation }) => {
                                 youtubeVideoId: item.attributes.youtubeVideoId,
                                 cover: item.attributes.coverImage != null ? item.attributes.coverImage.small : null
                             })
+                            dispatch({ type: 'DISABLE_SEARCH' })
                         }}
                     >
                         <Card style={styles.item}>
@@ -47,8 +53,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e3e3e3',
-        // marginTop: Constants.statusBarHeight,
-        // top: '5%',
     },
     item: {
         backgroundColor: '#fff',

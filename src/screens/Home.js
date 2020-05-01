@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import CardAnime from '../components/CardAnime';
 import GetAnime from "../hooks/GetAnime";
-import { SearchContext } from '../contexts/SearchContext';
 
 const Home = ({ navigation }) => {
 
-  const { state } = useContext(SearchContext)
-
-  const { data, loading } = state.search.length ? GetAnime(`anime?${state.search}page[limit]=10&page[offset]=0`) : GetAnime(`trending/anime`);
+  const { data, loading } = GetAnime(`trending/anime`) ;
   
   return (
     <View style={styles.container}>

@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
-import { StyleSheet, View, ProgressBarAndroid, Button } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ProgressBarAndroid } from 'react-native';
 import AppBarHead from '../components/AppBarHead';
 import GetAnime from "../hooks/GetAnime";
 import CardAnime from '../components/CardAnime';
-import { SearchContext } from '../contexts/SearchContext';
 
 const Category = ({ navigation }) => {
-  const { state } = useContext(SearchContext)
-  const { data, loading } = GetAnime(`anime?${state.search}page[limit]=10&page[offset]=0`);
+  const [page, SetPage] = useState(0);
+  const { data, loading } = GetAnime(`anime?page[limit]=10&page[offset]=${page*10}`)
+
+  const handleLoadMore = () => {
+    SetPage(page + 1)
+}
 
   return (
     <View style={styles.container}>
@@ -23,6 +26,7 @@ const Category = ({ navigation }) => {
         </View>
         :
         <CardAnime
+          handleLoadMore={handleLoadMore}
           navigation={navigation}
           data={data}
         />

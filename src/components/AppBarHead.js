@@ -12,21 +12,21 @@ const theme = {
 
 const AppBarHead = ({ navigation, title, icon }) => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [openSearch, setOpenSearch] = useState(false)
   const { state, dispatch } = useContext(SearchContext)
 
   return (
     <Appbar.Header theme={theme} >
       {
-        openSearch ?
+        state.status ?
         <Fragment>
           <Appbar.Action 
             color='white' 
             icon='arrow-left' 
             onPress={() => {
-              setOpenSearch(!openSearch)
+              navigation.goBack()
               setSearchQuery('')
               dispatch({ type: 'CLEAR_SEARCH' })
+              dispatch({ type: 'DISABLE_SEARCH' })
             }} />
           <View style={{ flex: 1 }}>
             <Searchbar
@@ -44,7 +44,10 @@ const AppBarHead = ({ navigation, title, icon }) => {
         <Fragment>
           <Appbar.Action color='white' icon={icon} onPress={() => icon === 'menu' ? navigation.openDrawer() : navigation.goBack()} />
           <Appbar.Content title={title} />
-          <Appbar.Action color='white' icon="magnify" onPress={() => setOpenSearch(!openSearch)} />
+          <Appbar.Action color='white' icon="magnify" onPress={() => {
+            dispatch({ type: 'ENABLE_SEARCH' })
+            navigation.navigate('Search')
+          }} />
         </Fragment>
       }
       </Appbar.Header>
