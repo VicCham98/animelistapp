@@ -1,28 +1,33 @@
 {
   "expo": {
-    "name": "animelist",
+    "name": "AnimeList",
     "slug": "animelist",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    "ios": {
+      "bundleIdentifier": "com.VicCham.animelist",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.VicCham.animelist",
+      "versionCode": 1
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#343a40"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
   }
 }
